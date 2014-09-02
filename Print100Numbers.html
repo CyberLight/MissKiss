@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Display 100 numbers processed by MissKiss processor</title>
+  <script type="text/javascript" src="src/MissKiss.js"></script>
+</head>
+
+<body>
+ <script type="text/javascript">
+    var processor = new MissKissProcessor(),
+	    fragment = document.createDocumentFragment(),
+		reportElem = document.createElement('div'),
+		ulElem = document.createElement('ul'),
+		pElemTitle = document.createElement('p');
+		
+	for(var i=1; i<=100; i++){
+	  var liElem = document.createElement('li'),
+	      result = processor.process(i);
+	      isNumber = typeof result == 'number',
+		  style = !isNumber ? 'color:red' : '';
+	  liElem.innerHTML = "<pre>For i =<strong>" +i+ "</strong> result: <strong style=" + style + ">" + result + "</strong></pre>";
+	  ulElem.appendChild(liElem);
+	  liElem = null;
+	}
+	
+	reportElem.appendChild(ulElem);
+	pElemTitle.innerHTML = '<strong>Results for <i style="color:red;">MissKiss</i> task: (from 1 to 100):</strong>'
+	fragment.appendChild(pElemTitle);
+	fragment.appendChild(reportElem);
+	document.body.appendChild(fragment.cloneNode(true));
+  </script>
+</body>
+
+</html>
